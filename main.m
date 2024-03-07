@@ -34,7 +34,7 @@ subplot(2,1,2);imshow(RSFimage_2); title("Downsampling and resizing up with gaus
 
 %% Non-ideal sampling
 
-
+%to do
 
 
 
