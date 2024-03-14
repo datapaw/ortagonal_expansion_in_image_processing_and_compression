@@ -1,5 +1,5 @@
 %% Image ideal sampling
-%importing the image
+% Importing the image
 Image = imread("images/cat.jpg");
 figure;imshow(Image)
 
