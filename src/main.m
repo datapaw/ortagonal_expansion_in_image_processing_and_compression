@@ -194,7 +194,7 @@ subplot(1, 2, 2);imshow(uint8(NUimage));title(['Quantized Image (Non-uniform, ',
 
 
 
-%%janeczek test
+%%skwara test
 
 
 
