@@ -228,3 +228,4 @@ figure;imshow(uints8(HaarImage));title('Haar image')
 
 
 
+
