@@ -1,14 +1,22 @@
-%% Image ideal sampling
-% Importing the image
-Image = imread("images/cat.jpg");
+%% Image sampling without map
+% Importing the image first method
+Image = imread('images/cameraman.png');
 figure;imshow(Image)
 
 % Convert the image to grayscale if necessary
 if size(Image, 3) == 3
     Image= rgb2gray(Image);
+    figure;imshow(Image)
+    ...imwrite(Image,"images/grayed.jpg")
 end
-figure;imshow(Image)
-...imwrite(Image,"images/grayed.jpg")
+
+%% Image sampling with map (program to convert to normal image)
+% Importing the image second method
+% [inpict, map] = imread('images/cameraman_map.png');
+% figure;imshow(inpict, map)
+% Image = ind2gray(inpict, map);
+% figure;imshow(Image)
+...imwrite(Image,"images/cameraman.png")
 
 %% Downsampling and other simple solutions
 % Downsampling by how many times
@@ -190,11 +198,31 @@ figure;subplot(1, 2, 1);imshow(uint8(Image));title('Original Image');
 subplot(1, 2, 2);imshow(uint8(NUimage));title(['Quantized Image (Non-uniform, ', num2str(NU_bits), ' levels)']);
 ...imwrite(uint8(NUimage),"images/NUimage.jpg")
 
-%% Image transforms
+%% ###################################
+%  #        Image transforms         #
+%  ###################################
+%% Haar wavelet
+% BOOK: https://en.wikipedia.org/wiki/Haar_wavelet
+% Perform the Haar transformation
+[LL, LH, HL, HH, HaarImage] = haar_wavelet(Image);
 
+figure;
+subplot(2,2,1);imshow(uint8(LL));title('LL')
+subplot(2,2,2);imshow(uint8(HL));title('HL')
+subplot(2,2,3);imshow(uint8(LH));title('LH')
+subplot(2,2,4);imshow(uint8(HH));title('HH')
+title('Haar images separated')
+figure;imshow(uints8(HaarImage));title('Haar image')
 
+% Test of inside function
+% [LL, HL, LH, HH] = dwt2(Image, 'haar');
+% figure; 
+% subplot(2,2,1);imshow(uint8(LL));title('LL')
+% subplot(2,2,2);imshow(uint8(HL));title('HL')
+% subplot(2,2,3);imshow(uint8(LH));title('LH')
+% subplot(2,2,4);imshow(uint8(HH));title('HH')
 
-%%skwara test
+%% Cosine function
 
 
 
