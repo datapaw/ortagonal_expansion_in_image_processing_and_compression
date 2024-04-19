@@ -212,7 +212,7 @@ subplot(2,2,2);imshow(uint8(HL));title('HL')
 subplot(2,2,3);imshow(uint8(LH));title('LH')
 subplot(2,2,4);imshow(uint8(HH));title('HH')
 title('Haar images separated')
-figure;imshow(uints8(HaarImage));title('Haar image')
+figure;imshow(uint8(HaarImage));title('Haar image')
 
 % Test of inside function
 % [LL, HL, LH, HH] = dwt2(Image, 'haar');
@@ -221,6 +221,42 @@ figure;imshow(uints8(HaarImage));title('Haar image')
 % subplot(2,2,2);imshow(uint8(HL));title('HL')
 % subplot(2,2,3);imshow(uint8(LH));title('LH')
 % subplot(2,2,4);imshow(uint8(HH));title('HH')
+
+%% Daubeches wavelet
+% Perform the Daubechies transformation
+[LL, LH, HL, HH, DaubechiesImage] = daubechies_wavelet(Image, 2);% 2 albo 3
+
+figure;
+subplot(2,2,1);imshow(uint8(LL));title('LL')
+subplot(2,2,2);imshow(uint8(HL));title('HL')
+subplot(2,2,3);imshow(uint8(LH));title('LH')
+subplot(2,2,4);imshow(uint8(HH));title('HH')
+title('Daubechies images separated')
+figure;imshow(uint8(DaubechiesImage));title('Daubechies image')
+
+%% Coiflet wavelet
+% Perform the Coiflet transformation
+[LL, LH, HL, HH, CoifletImage] = coiflet_wavelet(Image, 2);% 1 albo 2
+
+figure;
+subplot(2,2,1);imshow(uint8(LL));title('LL')
+subplot(2,2,2);imshow(uint8(HL));title('HL')
+subplot(2,2,3);imshow(uint8(LH));title('LH')
+subplot(2,2,4);imshow(uint8(HH));title('HH')
+title('Coiflet images separated')
+figure;imshow(uint8(CoifletImage));title('Coiflet image')
+
+%% 
+% Perform the Coiflet transformation
+[LL, LH, HL, HH, SymletImage] = symlet_wavelet(Image, 2);% 2 albo 3
+
+figure;
+subplot(2,2,1);imshow(uint8(LL));title('LL')
+subplot(2,2,2);imshow(uint8(HL));title('HL')
+subplot(2,2,3);imshow(uint8(LH));title('LH')
+subplot(2,2,4);imshow(uint8(HH));title('HH')
+title('Coiflet images separated')
+figure;imshow(uint8(SymletImage));title('Symlet image')
 
 %% Cosine function
 
