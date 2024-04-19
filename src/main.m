@@ -264,3 +264,4 @@ figure;imshow(uint8(SymletImage));title('Symlet image')
 
 
 
+
