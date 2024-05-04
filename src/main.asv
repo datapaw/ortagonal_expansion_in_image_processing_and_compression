@@ -1,6 +1,6 @@
 %% Image sampling without map
 % Importing the image first method
-Image = imread('images/lena_256.jpg');
+Image = imread('images/lena_gray.jpg');
 figure;imshow(Image)
 
 % Convert the image to grayscale if necessary
@@ -402,7 +402,7 @@ title('Error Image');
 
 %% Discrete Cosine Transform - Extended
 
-% Select an image file
+% Allow the user to select an image file
 [filename, pathname] = uigetfile('images/*.*', 'Select Image');
 
 % Start timer
@@ -415,9 +415,6 @@ image = imread(strcat(pathname,filename));
 if size(image, 3) == 3
     image = rgb2gray(image);
 end
-
-% Import an image
-% image = Image
 
 % Convert the image data type to double for processing
 image = double(image);
