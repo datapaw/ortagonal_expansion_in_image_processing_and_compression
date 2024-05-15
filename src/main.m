@@ -481,3 +481,110 @@ title('Error Image');
 
 % End timer and display elapsed time
 toc
+
+%% Discrete fourier transform
+
+% Select an image file
+[filename, pathname] = uigetfile('images/*.*', 'Select Image');
+
+% Start timer
+tic
+
+% % Read the selected image
+% image = imread(strcat(pathname,filename));
+% figure
+% imshow(image)
+% % Perform edge detection
+% edge_image = edge_detection(image);
+
+% % Display the original image and the edge-detected image side by side
+% figure;
+% subplot(1,2,1);
+% imshow(image);
+% title('Original Image');
+% subplot(1,2,2);
+% imshow(edge_image);
+% title('Edge-Detected Image');
+
+% Convert the image to grayscale if it's an RGB image
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+% % Display the original grayscale image
+% figure;
+% imshow(image);
+% title('Original Grayscale Image');
+
+% Convert the image data type to double for processing
+image = double(image);
+
+% Define the block size for processing
+block_size = 32;
+
+% Visualize the image with block boundaries
+block_visualization(uint8(image), block_size);
+
+% Perform 2D Discrete Cosine Transform (DCT)
+dct_image = my_dft(double(image), block_size);
+
+figure
+log_dct_image = log(abs(dct_image) + 1); % Adding 1 to avoid log(0)
+imshow(log_dct_image, []);
+
+% Reconstruct the image using inverse DCT
+inv = my_idft(dct_image, block_size);
+figure
+imshow(uint8(inv))
+% % Display the original and compressed images side by side
+% figure
+% imshowpair(uint8(image), uint8(inv), 'montage')
+% title('Original Image (Left) and Reconstructed Image (Right)');
+
+% Compute the absolute difference between original and compressed images
+error_image = abs(double(image) - double(inv));
+
+% Display the error image
+figure;
+imshow(error_image, []);
+title('Error Image');
+
+% % Calculate the size of the original grayscale image
+% original_size_bytes = numel(image);
+% 
+% % Calculate the size of the reconstructed image after inverse DFT
+% reconstructed_size_bytes = numel(uint8(inv));
+% 
+% % Display the sizes
+% fprintf('Original Image Size: %d bytes\n', original_size_bytes);
+% fprintf('Reconstructed Image Size: %d bytes\n', reconstructed_size_bytes);
+% 
+
+% End timer and display elapsed time
+toc
+
+%% Edge detection using Sobel & Canny filters
+% Read the image
+% Select an image file
+[filename, pathname] = uigetfile('images/*.*', 'Select Image');
+
+% Read the selected image
+image = imread(strcat(pathname,filename));
+
+% Convert to grayscale if necessary
+if size(image, 3) == 3
+    image = rgb2gray(image);
+end
+
+I = image;
+BW1 = edge(I,'sobel');
+BW2 = edge(I,'canny');
+tiledlayout(1,2)
+
+nexttile
+imshow(BW1)
+title('Sobel Filter')
+
+nexttile
+imshow(BW2)
+title('Canny Filter')
